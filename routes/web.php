@@ -24,15 +24,6 @@ Route::view('dashboard', 'dashboard')
     ->name('teacher.dashboard');
 
 Route::middleware(['auth'])->group(function () {
-    //Students
-    Route::get('/student-list', StudentList::class)->name('student.index');
-    Route::get('/create/student', AddStudent::class)->name('student.create');
-    Route::get('/edit/student/{id}', EditStudent::class)->name('student.edit');
-
-    //Routes
-    Route::get('/grade/list', GradeList::class)->name('grade.index');
-    Route::get('/grade/create', AddGrade::class)->name('grade.create');
-    Route::get('/grade/edit/{id}', EditGrade::class)->name('grade.edit');
 
     //Attendance
     Route::get('/attendance', AttendancePage::class)->name('attendance.page');
@@ -50,6 +41,17 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['admin', 'auth'])->group(function () {
     Route::get('admin/dashboard', AdminDashboard::class)->name('admin.dashboard');
+
+    //Students
+    Route::get('/student-list', StudentList::class)->name('student.index');
+    Route::get('/create/student', AddStudent::class)->name('student.create');
+    Route::get('/edit/student/{id}', EditStudent::class)->name('student.edit');
+
+    //Routes
+    Route::get('/grade/list', GradeList::class)->name('grade.index');
+    Route::get('/grade/create', AddGrade::class)->name('grade.create');
+    Route::get('/grade/edit/{id}', EditGrade::class)->name('grade.edit');
+
 });
 
 require __DIR__.'/auth.php';

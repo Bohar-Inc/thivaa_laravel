@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Teacher\Attendance;
 
+use App\Exports\AttendanceExport;
 use App\Models\Attendance;
 use App\Models\Grade;
 use App\Models\Student;
 use Carbon\Carbon;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 use Masmerise\Toaster\Toaster;
 
 class AttendancePage extends Component
@@ -53,6 +55,12 @@ class AttendancePage extends Component
             $this->updateAttendance($student->id, $day, $status);
         }
     }
+
+    public function exportToExcel(){
+        return Excel::download(new AttendanceExport($this->year, $this->month, $this->grade), 'attendance.xlsx');
+    }
+
+
 
     public function render()
     {

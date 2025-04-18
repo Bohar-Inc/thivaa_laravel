@@ -15,9 +15,11 @@
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route(auth()->user()->role == 'teacher' ? 'teacher.dashboard' : 'admin.dashboard')" :current="request()->routeIs(auth()->user()->role == 'teacher' ? 'teacher.dashboard' : 'admin.dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                 </flux:navlist.group>
-                <flux:navlist.item icon="academic-cap" :href="route('student.index')" :current="request()->routeIs('student.index')" wire:navigate>{{ __('Student Management') }}</flux:navlist.item>
-                <flux:navlist.item icon="bars-3-bottom-left" :href="route('grade.index')" :current="request()->routeIs('grade.index')" wire:navigate>{{ __('Grade Management') }}</flux:navlist.item>
-                <flux:navlist.item icon="calendar-days" :href="route('attendance.page')" :current="request()->routeIs('attendance.page')" wire:navigate>{{ __('Attendance Management') }}</flux:navlist.item>
+                @if(auth()->user()->role == 'admin')
+                    <flux:navlist.item icon="academic-cap" :href="route('student.index')" :current="request()->routeIs('student.index')" wire:navigate>{{ __('Student Management') }}</flux:navlist.item>
+                    <flux:navlist.item icon="bars-3-bottom-left" :href="route('grade.index')" :current="request()->routeIs('grade.index')" wire:navigate>{{ __('Grade Management') }}</flux:navlist.item>
+                @endif
+               <flux:navlist.item icon="calendar-days" :href="route('attendance.page')" :current="request()->routeIs('attendance.page')" wire:navigate>{{ __('Attendance Management') }}</flux:navlist.item>
             </flux:navlist>
 
             <flux:spacer />
